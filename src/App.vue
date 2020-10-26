@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>{{ title }}</h1>
     <Navbar 
-      @home="goHome"
+      @home="goHome" @updatePhotos="updatePhotos"
     />
     <template v-if="currentView==='allPhotos'">
       <AllPhotos />
@@ -29,7 +29,7 @@ export default {
   },
   data: () => ({
     title: "Photo Upload App",
-    currentView: "singlePhoto",
+    currentView: "allPhotos",
     photos: [],
     selectedPhoto: "",
   }),
@@ -42,6 +42,9 @@ export default {
   methods: {
     goHome() {
       this.currentView = "allPhotos";
+    },
+    updatePhotos(file) {
+      this.photos.push(file);
     }
   }
 };
