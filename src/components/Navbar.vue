@@ -1,5 +1,7 @@
 <template>
-  <div>This is navbar
+  <div>
+    <input type="button" id="homeButt" v-on:click="$emit('home')"
+      value="Home" />
     <upload />
   </div>
 </template>
@@ -15,4 +17,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  
+</style>

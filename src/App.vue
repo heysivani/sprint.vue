@@ -2,7 +2,9 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>{{ title }}</h1>
-    <Navbar />
+    <Navbar 
+      @home="goHome"
+    />
     <template v-if="currentView==='allPhotos'">
       <AllPhotos />
     </template>
@@ -27,7 +29,7 @@ export default {
   },
   data: () => ({
     title: "Photo Upload App",
-    currentView: "allPhotos",
+    currentView: "singlePhoto",
     photos: [],
     selectedPhoto: "",
   }),
@@ -36,6 +38,11 @@ export default {
       .then( promisedImages => {
         this.photos = promisedImages;
       })
+  },
+  methods: {
+    goHome() {
+      this.currentView = "allPhotos";
+    }
   }
 };
 </script>
