@@ -2,9 +2,13 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>{{ title }}</h1>
-    <navbar />
-    <allPhotos />
-    <singlePhoto />
+    <Navbar />
+    <template v-if="currentView==='allPhotos'">
+      <AllPhotos />
+    </template>
+    <template v-if="currentView==='singlePhoto'">
+      <SinglePhoto />
+    </template>
   </div>
 </template>
 
@@ -16,12 +20,15 @@ import SinglePhoto from "./components/SinglePhoto";
 export default {
   name: "App",
   components: {
-    navbar: Navbar,
-    allPhotos: AllPhotos,
-    singlePhoto: SinglePhoto,
+    Navbar: Navbar,
+    AllPhotos: AllPhotos,
+    SinglePhoto: SinglePhoto,
   },
   data: () => ({
-    title: "Photo Upload App"
+    title: "Photo Upload App",
+    currentView: "allPhotos",
+    photos: [],
+    selectedPhoto: "",
   })
 };
 </script>

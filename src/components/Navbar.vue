@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div>This is navbar
     <upload />
-  <div />
+  </div>
 </template>
 
 <script>

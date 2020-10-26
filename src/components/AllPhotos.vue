@@ -1,5 +1,5 @@
 <template>
-  <div />
+  <div class="allPhotos">This is all photos</div>
 </template>
 
 <script>
