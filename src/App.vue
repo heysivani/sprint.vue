@@ -16,6 +16,7 @@
 import Navbar from "./components/Navbar";
 import AllPhotos from "./components/AllPhotos";
 import SinglePhoto from "./components/SinglePhoto";
+import { listObjects } from "../utils/index.js";
 
 export default {
   name: "App",
@@ -29,7 +30,13 @@ export default {
     currentView: "allPhotos",
     photos: [],
     selectedPhoto: "",
-  })
+  }),
+  created() {
+    listObjects()
+      .then( promisedImages => {
+        this.photos = promisedImages;
+      })
+  }
 };
 </script>
 
