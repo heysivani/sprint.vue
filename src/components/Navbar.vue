@@ -1,10 +1,17 @@
 <template>
+  <div>
+    <upload />
   <div />
 </template>
 
 <script>
+import Upload from "./Upload";
+
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  components: {
+    upload: Upload,
+  },
 };
 </script>
 
