@@ -20,7 +20,7 @@ export default {
   methods: {
     async saveFile (file) {
       const savedFile = await saveObject(file[0]);
-      this.updatePhotos(savedFile);
+      this.updatePhotos(file);
     }
   }
 };
