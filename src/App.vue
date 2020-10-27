@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>{{ title }}</h1>
     <Navbar 
-      @home="goHome" @updatePhotos="updatePhotos"
+      @home="goHome" :updatePhotos="updatePhotos"
     />
     <template v-if="currentView==='allPhotos'">
       <AllPhotos />
@@ -44,7 +44,10 @@ export default {
       this.currentView = "allPhotos";
     },
     updatePhotos(file) {
+      console.log("before", this.photos);
+      console.log("updated photos!", file);
       this.photos.push(file);
+      console.log("after", this.photos);
     }
   }
 };

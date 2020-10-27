@@ -3,6 +3,7 @@
      <input type="file" @change="onChange"/>
      <input type="submit" id="uploadButt" value="Upload"
      v-on:click="$emit('save-file', [file])"
+     
     />
   </div>
 </template>
