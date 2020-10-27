@@ -4,10 +4,14 @@
     <h1>{{ title }}</h1>
     <Navbar @home="goHome" :updatePhotos="updatePhotos" />
     <template v-if="currentView === 'allPhotos'">
-      <AllPhotos ref="allPhotosComp" v-bind:convertedPhotos="convertedPhotos" />
+      <AllPhotos 
+        ref="allPhotosComp" 
+        v-bind:convertedPhotos="convertedPhotos" 
+        @select-photo="selectPhoto"
+      />
     </template>
-    <template v-if="currentView === 'singlePhoto'">
-      <SinglePhoto />
+    <template v-else-if="currentView === 'singlePhoto'">
+      <SinglePhoto v-bind:selectedPhoto='selectedPhoto'/>
     </template>
   </div>
 </template>
@@ -31,6 +35,7 @@ export default {
     photos: [],
     convertedPhotos: [],
     selectedPhoto: "",
+    
   }),
   created() {
     listObjects()
@@ -61,6 +66,12 @@ export default {
       
     const resolvedPromises = await promises;
     this.convertedPhotos = await Promise.all(resolvedPromises);
+    },
+    selectPhoto(index) {
+      this.currentView = "singlePhoto";
+      this.selectedPhoto = this.convertedPhotos[index];
+      this.selectedPhoto = "data:image/*;base64," + this.selectedPhoto;
+      console.log("selected photo base64 string", this.selectedPhoto);
     }
   }
 };

@@ -1,10 +1,13 @@
 <template>
-  <div class="singlePhoto">This is single photo</div>
+  <div class="singlePhoto">
+  <img :src='selectedPhoto'/>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "SinglePhoto"
+  name: "SinglePhoto",
+  props: ['selectedPhoto']
 };
 </script>
 
