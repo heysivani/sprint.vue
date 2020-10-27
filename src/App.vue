@@ -18,7 +18,7 @@
 import Navbar from "./components/Navbar";
 import AllPhotos from "./components/AllPhotos";
 import SinglePhoto from "./components/SinglePhoto";
-import { listObjects } from "../utils/index.js";
+import { listObjects, getSingleObject } from "../utils/index.js";
 
 export default {
   name: "App",
@@ -31,6 +31,7 @@ export default {
     title: "Photo Upload App",
     currentView: "allPhotos",
     photos: [],
+    convertedPhotos: [],
     selectedPhoto: "",
   }),
   created() {
@@ -38,16 +39,21 @@ export default {
       .then( promisedImages => {
         this.photos = promisedImages;
       })
+      .then( photos => {
+        this.convertToBase()
+      })
   },
   methods: {
     goHome() {
       this.currentView = "allPhotos";
     },
     updatePhotos(file) {
-      console.log("before", this.photos);
-      console.log("updated photos!", file);
       this.photos.push(file);
-      console.log("after", this.photos);
+      this.convertToBase();
+    },
+    async convertToBase() {
+      let promises = this.photos.map(photo => getSingleObject(photo.Key));
+      this.convertedPhotos = await promises;
     }
   }
 };

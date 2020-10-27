@@ -19,9 +19,7 @@ export default {
   props: ["updatePhotos"],
   methods: {
     async saveFile (file) {
-      console.log("file in saveFile", file[0]);
       const savedFile = await saveObject(file[0]);
-      console.log("saved file ", savedFile);
       this.updatePhotos(savedFile);
     }
   }

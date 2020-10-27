@@ -17,7 +17,6 @@ export default {
   methods: {
     onChange(event) {
       this.file = event.target.files[0];
-      console.log("file", this.file);
     }
   }
 };
