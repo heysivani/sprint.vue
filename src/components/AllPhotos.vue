@@ -1,6 +1,5 @@
 <template>
   <div class="allPhotos"
-    v-if="convertedPhotos.length"
     >This is all photos
       <img v-for="(photo, index) in convertedPhotos"
         :key="index"
@@ -12,12 +11,7 @@
 <script>
 export default {
   name: "AllPhotos",
-  props: ["convertedPhotos"],
-  methods: {
-    renderImages() {
-      console.log("Rendered!", this.convertedPhotos);
-    }
-  }
+  props: ['convertedPhotos'],
 };
 </script>
 

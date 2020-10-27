@@ -16,7 +16,7 @@ export default {
   components: {
     Upload: Upload,
   },
-  props: ["updatePhotos"],
+  props: ['updatePhotos'],
   methods: {
     async saveFile (file) {
       const savedFile = await saveObject(file[0]);

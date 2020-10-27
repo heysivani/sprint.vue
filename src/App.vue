@@ -4,7 +4,7 @@
     <h1>{{ title }}</h1>
     <Navbar @home="goHome" :updatePhotos="updatePhotos" />
     <template v-if="currentView === 'allPhotos'">
-      <AllPhotos ref="allPhotosComp" :convertedPhotos="convertedPhotos" />
+      <AllPhotos ref="allPhotosComp" v-bind:convertedPhotos="convertedPhotos" />
     </template>
     <template v-if="currentView === 'singlePhoto'">
       <SinglePhoto />
@@ -50,18 +50,17 @@ export default {
       this.convertToBase();
     },
     async convertToBase() {
-      console.log("before conversion", this.photos);
+      const tenPhotos = this.photos.slice(0, 10);
       let promises = [];
       //this.photos.map(photo => getSingleObject(photo.Key));
-     for (let photo of this.photos) {
+     for (let photo of tenPhotos) {
        if(photo.Key) {
          promises.push(getSingleObject(photo.Key));
        }
      }
       
-      this.convertedPhotos = await promises;
-      console.log("converted", Array.isArray(this.convertedPhotos));
-      this.$refs.allPhotosComp.renderImages();
+    const resolvedPromises = await promises;
+    this.convertedPhotos = await Promise.all(resolvedPromises);
     }
   }
 };
