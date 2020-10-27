@@ -2,13 +2,11 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>{{ title }}</h1>
-    <Navbar 
-      @home="goHome" :updatePhotos="updatePhotos"
-    />
-    <template v-if="currentView==='allPhotos'">
-      <AllPhotos />
+    <Navbar @home="goHome" :updatePhotos="updatePhotos" />
+    <template v-if="currentView === 'allPhotos'">
+      <AllPhotos ref="allPhotosComp" :convertedPhotos="convertedPhotos" />
     </template>
-    <template v-if="currentView==='singlePhoto'">
+    <template v-if="currentView === 'singlePhoto'">
       <SinglePhoto />
     </template>
   </div>
@@ -52,8 +50,18 @@ export default {
       this.convertToBase();
     },
     async convertToBase() {
-      let promises = this.photos.map(photo => getSingleObject(photo.Key));
+      console.log("before conversion", this.photos);
+      let promises = [];
+      //this.photos.map(photo => getSingleObject(photo.Key));
+     for (let photo of this.photos) {
+       if(photo.Key) {
+         promises.push(getSingleObject(photo.Key));
+       }
+     }
+      
       this.convertedPhotos = await promises;
+      console.log("converted", Array.isArray(this.convertedPhotos));
+      this.$refs.allPhotosComp.renderImages();
     }
   }
 };
